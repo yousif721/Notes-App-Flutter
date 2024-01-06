@@ -1,0 +1,22 @@
+name: Update Language
+
+on:
+  push:
+    branches:
+      - main  # Replace with your repository's default branch name
+
+jobs:
+  update-language:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set Dart as primary language
+        run: echo '{"language": "Dart"}' > $GITHUB_WORKSPACE/.gitattributes
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add -A
+          git commit -m "Override language statistics"
+          git push
